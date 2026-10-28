@@ -1,0 +1,4 @@
+if game.PlaceId == 13822889 then -- mog sim
+loadstring(game:HttpGet('https://raw.githubusercontent.com/shyoma30/shyhubv2/refs/heads/main/kinghub'))("")
+elseif game.PlaceId == 107535308163741 then -- mog evo
+loadstring(game:HttpGet("https://raw.githubusercontent.com/shyoma30/shyhubv2/refs/heads/main/mog%20evo"))()
