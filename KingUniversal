@@ -1,5 +1,5 @@
-if game.PlaceId == 13822889 then -- mog sim
+if game.PlaceId == 130641102725850 then -- mog or die
     loadstring(game:HttpGet("https://raw.githubusercontent.com/shyoma30/shyhubv2/refs/heads/main/kinghub"))()
-elseif game.PlaceId == 107535308163741 then -- mog evo
+elseif game.PlaceId == 134820818906933 then -- mog evo
     loadstring(game:HttpGet("https://raw.githubusercontent.com/shyoma30/shyhubv2/refs/heads/main/mog%20evo"))()
 end
