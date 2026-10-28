@@ -1,3 +1,22 @@
+local PUSL = loadstring(game:HttpGet("https://secure.pandauth.com/pv4/lib"))()
+if not PUSL or type(PUSL.configure) ~= "function" then
+    return warn("[Panda] Library failed to initialize.")
+end
+
+PUSL.configure({
+    serviceId = "king",
+})
+
+local key = "USER_KEY_HERE" -- replace with your own key input
+local result = PUSL.validate(key)
+
+if not result.success then
+    warn("[Panda] Get a key: " .. PUSL.getKeyUrl())
+    return
+end
+
+print("[Panda] Authenticated. Premium:", result.isPremium)
+
 if game.PlaceId == 130641102725850 then -- mog or die
     loadstring(game:HttpGet("https://raw.githubusercontent.com/shyoma30/shyhubv2/refs/heads/main/kinghub"))()
 elseif game.PlaceId == 134820818906933 then -- mog evo
