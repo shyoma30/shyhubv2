@@ -2,4 +2,38 @@ if game.PlaceId == 130641102725850 then -- mog or die
     loadstring(game:HttpGet("https://raw.githubusercontent.com/shyoma30/shyhubv2/refs/heads/main/kinghub"))()
 elseif game.PlaceId == 134820818906933 then -- mog evo
     loadstring(game:HttpGet("https://raw.githubusercontent.com/shyoma30/shyhubv2/refs/heads/main/mog%20evo"))()
+
+local function Discord()
+    pcall(function()
+        if isfile and writefile and not isfile('invited_butter.txt') then
+          writefile('invited_butter.txt', 'true')
+          local discordInvite = "https://discord.gg/vFjNvBGTBJ"
+  
+          local http_request = (syn and syn.request) or (http and http.request) or request
+          if http_request then
+              http_request({
+                  Url = "http://127.0.0.1:6463/rpc?v=1",
+                  Method = "POST",
+                  Headers = {
+                      ["Content-Type"] = "application/json",
+                      ["Origin"] = "https://discord.com"
+                  },
+                  Body = game:GetService("HttpService"):JSONEncode({
+                      cmd = "INVITE_BROWSER",
+                      args = {
+                          code = string.match(discordInvite, "discord%.com/invite/(%w+)")
+                      },
+                      nonce = game:GetService("HttpService"):GenerateGUID(false)
+                  })
+              })
+          else
+              game:GetService("StarterGui"):SetCore("SendNotification", {
+                  Title = "Executor Not Supported",
+                  Text = "Join manually: " .. discordInvite,
+                  Duration = 5
+              })
+          end
+        end
+    end)
+end
 end
