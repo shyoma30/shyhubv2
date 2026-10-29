@@ -72,3 +72,8 @@ elseif game.PlaceId == 134820818906933 then -- mog evo
     openDiscord()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/shyoma30/shyhubv2/refs/heads/main/mog%20evo"))()
 end
+
+elseif game.PlaceId == 142823291 then -- mm2
+    openDiscord()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/shyoma30/shyhubv2/refs/heads/main/Shystar"))()
+end
