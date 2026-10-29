@@ -77,3 +77,8 @@ elseif game.PlaceId == 142823291 then -- mm2
     openDiscord()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/shyoma30/shyhubv2/refs/heads/main/Shystar"))()
 end
+
+elseif game.PlaceId == 537413528 then -- mm2
+    openDiscord()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/shyoma30/shyhubv2/refs/heads/main/Babftfarm"))()
+end
