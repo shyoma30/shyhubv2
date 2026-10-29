@@ -24,7 +24,7 @@ end
 
 print("[Panda] Authenticated. Premium:", result.isPremium)
 
--- Your protected code goes below this line.
+
 
 local function openDiscord()
     pcall(function()
@@ -66,19 +66,25 @@ end
 
 if game.PlaceId == 130641102725850 then -- mog or die
     openDiscord()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/shyoma30/shyhubv2/refs/heads/main/kinghub"))()
+    loadstring(game:HttpGet(
+        "https://raw.githubusercontent.com/shyoma30/shyhubv2/refs/heads/main/kinghub"
+    ))()
 
 elseif game.PlaceId == 134820818906933 then -- mog evo
     openDiscord()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/shyoma30/shyhubv2/refs/heads/main/mog%20evo"))()
-end
+    loadstring(game:HttpGet(
+        "https://raw.githubusercontent.com/shyoma30/shyhubv2/refs/heads/main/mog%20evo"
+    ))()
 
 elseif game.PlaceId == 142823291 then -- mm2
     openDiscord()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/shyoma30/shyhubv2/refs/heads/main/Shystar"))()
-end
+    loadstring(game:HttpGet(
+        "https://raw.githubusercontent.com/shyoma30/shyhubv2/refs/heads/main/Shystar"
+    ))()
 
-elseif game.PlaceId == 537413528 then -- mm2
+elseif game.PlaceId == 537413528 then -- babft
     openDiscord()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/shyoma30/shyhubv2/refs/heads/main/Babftfarm"))()
+    loadstring(game:HttpGet(
+        "https://raw.githubusercontent.com/shyoma30/shyhubv2/refs/heads/main/Babftfarm"
+    ))()
 end
