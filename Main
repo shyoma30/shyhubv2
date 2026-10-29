@@ -1,23 +1,30 @@
-local PUSL = loadstring(game:HttpGet("https://secure.pandauth.com/pv4/lib"))()
+local key = getgenv().PandaKey
 
-if not PUSL or type(PUSL.configure) ~= "function" then
+if type(key) ~= "string" or key:gsub("%s", "") == "" then
+    return warn('[Panda] No key set. Use getgenv().PandaKey = "YOUR_KEY" before loading.')
+end
+
+local okLib, PUSL = pcall(function()
+    return loadstring(game:HttpGet("https://secure.pandauth.com/pv4/lib"))()
+end)
+
+if not okLib or type(PUSL) ~= "table" or type(PUSL.configure) ~= "function" then
     return warn("[Panda] Library failed to initialize.")
 end
 
-PUSL.configure({
-    serviceId = "king"
-})
+PUSL.configure({ serviceId = "king" })
 
-local key = "USER_KEY_HERE" -- Replace with the user's actual key
+local okVal, result = pcall(PUSL.validate, (key:gsub("^%s+", ""):gsub("%s+$", "")))
 
-local result = PUSL.validate(key)
-
-if not result or not result.success then
-    warn("[Panda] Get a key: " .. tostring(PUSL.getKeyUrl()))
+if not okVal or type(result) ~= "table" or not result.success then
+    local okUrl, url = pcall(PUSL.getKeyUrl)
+    warn("[Panda] Invalid key. Get a key: " .. (okUrl and tostring(url) or "unavailable"))
     return
 end
 
-print("[Panda] Authenticated. Premium:", tostring(result.isPremium))
+print("[Panda] Authenticated. Premium:", result.isPremium)
+
+-- Your protected code goes below this line.
 
 local function openDiscord()
     pcall(function()
