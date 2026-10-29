@@ -1,58 +1,67 @@
 local PUSL = loadstring(game:HttpGet("https://secure.pandauth.com/pv4/lib"))()
+
 if not PUSL or type(PUSL.configure) ~= "function" then
     return warn("[Panda] Library failed to initialize.")
 end
 
 PUSL.configure({
-    serviceId = "king",
+    serviceId = "king"
 })
 
-local key = "USER_KEY_HERE" -- replace with your own key input
+local key = "USER_KEY_HERE" -- Replace with the user's actual key
+
 local result = PUSL.validate(key)
 
-if not result.success then
-    warn("[Panda] Get a key: " .. PUSL.getKeyUrl())
+if not result or not result.success then
+    warn("[Panda] Get a key: " .. tostring(PUSL.getKeyUrl()))
     return
 end
 
-print("[Panda] Authenticated. Premium:", result.isPremium)
+print("[Panda] Authenticated. Premium:", tostring(result.isPremium))
 
-if game.PlaceId == 130641102725850 then -- mog or die
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/shyoma30/shyhubv2/refs/heads/main/kinghub"))()
-elseif game.PlaceId == 134820818906933 then -- mog evo
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/shyoma30/shyhubv2/refs/heads/main/mog%20evo"))()
-
-local function Discord()
+local function openDiscord()
     pcall(function()
-        if isfile and writefile and not isfile('invited_butter.txt') then
-          writefile('invited_butter.txt', 'true')
-          local discordInvite = "https://discord.gg/vFjNvBGTBJ"
-  
-          local http_request = (syn and syn.request) or (http and http.request) or request
-          if http_request then
-              http_request({
-                  Url = "http://127.0.0.1:6463/rpc?v=1",
-                  Method = "POST",
-                  Headers = {
-                      ["Content-Type"] = "application/json",
-                      ["Origin"] = "https://discord.com"
-                  },
-                  Body = game:GetService("HttpService"):JSONEncode({
-                      cmd = "INVITE_BROWSER",
-                      args = {
-                          code = string.match(discordInvite, "discord%.com/invite/(%w+)")
-                      },
-                      nonce = game:GetService("HttpService"):GenerateGUID(false)
-                  })
-              })
-          else
-              game:GetService("StarterGui"):SetCore("SendNotification", {
-                  Title = "Executor Not Supported",
-                  Text = "Join manually: " .. discordInvite,
-                  Duration = 5
-              })
-          end
+        if isfile and writefile and not isfile("invited_butter.txt") then
+            writefile("invited_butter.txt", "true")
+
+            local discordInvite = "https://discord.gg/vFjNvBGTBJ"
+
+            local http_request = (syn and syn.request)
+                or (http and http.request)
+                or request
+
+            if http_request then
+                http_request({
+                    Url = "http://127.0.0.1:6463/rpc?v=1",
+                    Method = "POST",
+                    Headers = {
+                        ["Content-Type"] = "application/json",
+                        ["Origin"] = "https://discord.com"
+                    },
+                    Body = game:GetService("HttpService"):JSONEncode({
+                        cmd = "INVITE_BROWSER",
+                        args = {
+                            code = string.match(discordInvite, "discord%.com/invite/(%w+)")
+                        },
+                        nonce = game:GetService("HttpService"):GenerateGUID(false)
+                    })
+                })
+            else
+                game:GetService("StarterGui"):SetCore("SendNotification", {
+                    Title = "Executor Not Supported",
+                    Text = "Join manually: " .. discordInvite,
+                    Duration = 5
+                })
+            end
         end
     end)
 end
+
+if game.PlaceId == 130641102725850 then -- mog or die
+    openDiscord()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/shyoma30/shyhubv2/refs/heads/main/kinghub"))()
+
+elseif game.PlaceId == 134820818906933 then -- mog evo
+    openDiscord()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/shyoma30/shyhubv2/refs/heads/main/mog%20evo"))()
 end
