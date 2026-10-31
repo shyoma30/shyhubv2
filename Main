@@ -88,3 +88,11 @@ elseif game.PlaceId == 537413528 then -- babft
         "https://raw.githubusercontent.com/shyoma30/shyhubv2/refs/heads/main/Babftfarm"
     ))()
 end
+
+elseif game.PlaceId == 155615604 then -- prison life
+    openDiscord()
+    loadstring(game:HttpGet(
+        "https://raw.githubusercontent.com/shyoma30/shyhubv2/refs/heads/main/prisonlife"
+    ))()
+end
+
