@@ -1,11 +1,30 @@
 local key = getgenv().PandaKey
 
+local function fetch(url)
+    local okGet, src = pcall(game.HttpGet, game, url)
+    if not okGet then
+        warn("[dbg] HttpGet failed:", url, src)
+        return
+    end
+    local fn, err = loadstring(src)
+    if not fn then
+        warn("[dbg] compile failed:", url, err)
+        return
+    end
+    local ok, res = xpcall(fn, debug.traceback)
+    if not ok then
+        warn("[dbg] runtime error:", url, res)
+        return
+    end
+    return res
+end
+
 if type(key) ~= "string" or key:gsub("%s", "") == "" then
     return warn('[Panda] No key set. Use getgenv().PandaKey = "YOUR_KEY" before loading.')
 end
 
 local okLib, PUSL = pcall(function()
-    return loadstring(game:HttpGet("https://secure.pandauth.com/pv4/lib"))()
+    return fetch("https://secure.pandauth.com/pv4/lib")
 end)
 
 if not okLib or type(PUSL) ~= "table" or type(PUSL.configure) ~= "function" then
@@ -23,8 +42,6 @@ if not okVal or type(result) ~= "table" or not result.success then
 end
 
 print("[Panda] Authenticated. Premium:", result.isPremium)
-
-
 
 local function openDiscord()
     pcall(function()
@@ -66,32 +83,21 @@ end
 
 if game.PlaceId == 130641102725850 then -- mog or die
     openDiscord()
-    loadstring(game:HttpGet(
-        "https://raw.githubusercontent.com/shyoma30/shyhubv2/refs/heads/main/kinghub"
-    ))()
+    fetch("https://raw.githubusercontent.com/shyoma30/shyhubv2/refs/heads/main/kinghub")
 
 elseif game.PlaceId == 134820818906933 then -- mog evo
     openDiscord()
-    loadstring(game:HttpGet(
-        "https://raw.githubusercontent.com/shyoma30/shyhubv2/refs/heads/main/mog%20evo"
-    ))()
+    fetch("https://raw.githubusercontent.com/shyoma30/shyhubv2/refs/heads/main/mog%20evo")
 
 elseif game.PlaceId == 142823291 then -- mm2
     openDiscord()
-    loadstring(game:HttpGet(
-        "https://raw.githubusercontent.com/shyoma30/shyhubv2/refs/heads/main/Shystar"
-    ))()
+    fetch("https://raw.githubusercontent.com/shyoma30/shyhubv2/refs/heads/main/Shystar")
 
 elseif game.PlaceId == 537413528 then -- babft
     openDiscord()
-    loadstring(game:HttpGet(
-        "https://raw.githubusercontent.com/shyoma30/shyhubv2/refs/heads/main/Babftfarm"
-    ))()
+    fetch("https://raw.githubusercontent.com/shyoma30/shyhubv2/refs/heads/main/Babftfarm")
 
 elseif game.PlaceId == 155615604 then -- prison life
     openDiscord()
-    loadstring(game:HttpGet(
-        "https://raw.githubusercontent.com/shyoma30/shyhubv2/refs/heads/main/prisonlife"
-    ))()
+    fetch("https://raw.githubusercontent.com/shyoma30/shyhubv2/refs/heads/main/prisonlife")
 end
-
