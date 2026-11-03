@@ -1,47 +1,4 @@
-local key = getgenv().PandaKey
 
-local function fetch(url)
-    local okGet, src = pcall(game.HttpGet, game, url)
-    if not okGet then
-        warn("[dbg] HttpGet failed:", url, src)
-        return
-    end
-    local fn, err = loadstring(src)
-    if not fn then
-        warn("[dbg] compile failed:", url, err)
-        return
-    end
-    local ok, res = xpcall(fn, debug.traceback)
-    if not ok then
-        warn("[dbg] runtime error:", url, res)
-        return
-    end
-    return res
-end
-
-if type(key) ~= "string" or key:gsub("%s", "") == "" then
-    return warn('[Panda] No key set. Use getgenv().PandaKey = "YOUR_KEY" before loading.')
-end
-
-local okLib, PUSL = pcall(function()
-    return fetch("https://secure.pandauth.com/pv4/lib")
-end)
-
-if not okLib or type(PUSL) ~= "table" or type(PUSL.configure) ~= "function" then
-    return warn("[Panda] Library failed to initialize.")
-end
-
-PUSL.configure({ serviceId = "king" })
-
-local okVal, result = pcall(PUSL.validate, (key:gsub("^%s+", ""):gsub("%s+$", "")))
-
-if not okVal or type(result) ~= "table" or not result.success then
-    local okUrl, url = pcall(PUSL.getKeyUrl)
-    warn("[Panda] Invalid key. Get a key: " .. (okUrl and tostring(url) or "unavailable"))
-    return
-end
-
-print("[Panda] Authenticated. Premium:", result.isPremium)
 
 local function openDiscord()
     pcall(function()
